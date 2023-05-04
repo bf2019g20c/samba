@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tranplate1</title>
+    <style>
+        body{
+            background-image: linear-gradient(to right top, #65dfc9, #6cdbeb);
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+        .main{
+            background-color: rgba(255, 255, 255, 0.4);
+            position: relative;
+            width: 60%;
+            height: 600px;
+            box-shadow: 0 5px 15px rgba(20, 20, 20, 0.8);
+            display: flex;
+            border-radius: 50px;
+            top: 100px;
+            backdrop-filter: blur(50px);
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+		<div class = "samba_text_login">
+			<br><h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;你正在尝试登录samba，请输入密码！</h2>
+			<hr>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="登录" onclick="login()">
+			<input type="button" id="btnClear" value="清除" onclick="doClear()" />
+		</div>
+		<br>
+		<div class = "login_control">
+				<span class = "account"><br><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户名：</p><input type="text" placeholder="请输入用户名..." id="username"></span>
+				<span class = "password"><br><h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码：</h3><input type="password" placeholder="请输入密码..." id="passwd"></span>
+			<script>
+				let accountAll = [{ // 存储账户json数据的数组
+									username: 'bf2019g20c',
+									passwd: '20c123'
+								}
+							]
+							function login() { //登陆判断
+								let username = document.getElementById('username').value;
+								let passwd = document.getElementById('passwd').value;
+								let account = accountAll.filter(function(e) {
+									return e.username == username
+								})[0]; // 筛选账号返回数组，不存在则返回空数组
+								if (!account) {
+									alert('账户不存在');
+								} else {
+									if (account.username == username && account.passwd == passwd) {
+										alert('登陆成功!点击确定跳转到samba!');
+										window.location.href='sambamain.html';
+									} else {
+										alert('密码错误!');
+									}
+								}
+							}
+							function doClear() { //获取页面所有的input框，是text和password框，内容=空串
+								let inputs = document.getElementsByTagName("input");
+								for (let i = 0; i < inputs.length; i++) {
+									if (inputs[i].type == 'text' || inputs[i].type == 'password') {
+										inputs[i].value = '';
+									}
+								}
+							}
+							//给清除按钮增加onclick事件
+							let btnClear = document.getElementById('btnClear');
+							btnClear.addEventListener('click', function() {
+								doClear();
+							});
+			</script>
+		</div>
+	</div>
+</body>
+</html>
